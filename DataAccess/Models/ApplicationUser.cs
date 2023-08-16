@@ -7,12 +7,6 @@ namespace DataAccess.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        //public override string Id
-        //{
-        //    get { return base.Id.ToUpper(); } // Custom logic here
-        //    set { base.Id = value; }
-        //}
-
         [Required]
         [DisplayName("First Name")]
         public string? FirstName { get; set; }
@@ -25,9 +19,16 @@ namespace DataAccess.Models
         public string? StreetAddress { get; set; }
 
         public string? City { get; set; }
-        public string? State { get; set; }
+
+        public string? ImageUrl { get; set; }
+
+        [Required]
+        [DisplayName("Card Number")]
+        public string? CardNumber { get; set; }
+
         [DisplayName("Postal Code")]
         public string? PostalCode { get; set; }
+
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } }
     }
