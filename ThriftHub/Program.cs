@@ -1,12 +1,12 @@
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
@@ -18,7 +18,9 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddScoped<DbInitializer>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -37,6 +39,13 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+// SeedDatabase();
 app.Run();
 
+// Only needed for first run?
+//void SeedDatabase()
+//{
+//    using var scope = app.Services.CreateScope();
+//    var dbInitializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+//    dbInitializer.Initialize();
+//}
