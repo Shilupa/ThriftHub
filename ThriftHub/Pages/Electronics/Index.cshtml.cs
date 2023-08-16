@@ -1,15 +1,17 @@
-﻿using DataAccess.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using DataAccess.Models;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Utility;
-namespace ThriftHub.Pages.Fashion
+
+namespace ThriftHub.Pages.Electronics
 {
-    public class IndexModel : PageModel
+	public class IndexModel : PageModel
     {
-        //public string? ApplicationUserId { get; private set; }
-        //public string? ApplicationUsername { get; private set; }
-        //public string? FirstName { get; private set; }
         private readonly UnitOfWork _unitOfWork;
         public IEnumerable<Product> objProductList;
         public List<Product> filteredProducts { get; set; }
@@ -29,7 +31,7 @@ namespace ThriftHub.Pages.Fashion
             objProductList = _unitOfWork.Product.GetAll();
 
             // Assuming objProductList is a collection of products
-            filteredProducts = objProductList.Where(product => product.CategoryId == SD.FashionId).ToList();
+            filteredProducts = objProductList.Where(product => product.CategoryId == SD.ElectronicsId).ToList();
             return Page();
         }
     }

@@ -2,6 +2,7 @@
 using DataAccess.Models;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq.Expressions;
 
 namespace Infrastructure
@@ -35,6 +36,7 @@ namespace Infrastructure
             _dbContext.Set<T>().RemoveRange(entities);
             _dbContext.SaveChanges();
         }
+
 
         public virtual T Get(Expression<Func<T, bool>> predicate, bool trackChanges = false, string includes = null)
         {

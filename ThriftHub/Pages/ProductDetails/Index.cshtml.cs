@@ -15,8 +15,6 @@ namespace ThriftHub.Pages.ProductDetails
         [BindProperty]
         public ApplicationUser objUser { get; set; }
 
-        public string? applicationUserId { get; private set; }
-
         public IndexModel(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -26,13 +24,16 @@ namespace ThriftHub.Pages.ProductDetails
 
         public IActionResult OnGet(int productId)
         {
-            //check to see if user logged on
-            //var claimsIdentity = User.Identity as ClaimsIdentity;
-            //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            //TempData["UserLoggedIn"] = claim;
-            objProduct = _unitOfWork.Product.Get(p => p.Id == productId, includes: "Category");
-            objUser = _unitOfWork.ApplicationUser.Get(u => u.Id == objProduct.ApplicationUserId);
-            applicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (productId != 0)
+            {
+                objProduct = _unitOfWork.Product.Get(p => p.Id == productId, includes: "Category");
+                objUser = _unitOfWork.ApplicationUser.Get(u => u.Id == objProduct.ApplicationUserId);
+            }
+
+            if (objProduct == null)
+            {
+                return NotFound();
+            }
             return Page();
         }
 

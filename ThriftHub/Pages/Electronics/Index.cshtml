@@ -1,17 +1,10 @@
 ﻿@page
-@model ThriftHub.Pages.Fashion.IndexModel
+@model ThriftHub.Pages.Electronics.IndexModel
 @{
     <div class="container">
         <div class="row pt=4">
-            <!--Start Row-->
-            <div class="col-6">
-                <!--50% of row-->
-                @*<p>Application User ID: @Model.ApplicationUserId</p>
-                    <p>Application Username: @Model.ApplicationUsername</p>
-                    <p>Application Username: @Model.FirstName</p>*@
-            </div><!-- End 1st Column-->
+
             <div class="col-6 text-end">
-                <!--50% row right justified-->
                 <a asp-page="../UploadProduct/Upsert" asp-route-id="0" asp-route-pageName="Fashion" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i> Create New Product
                 </a>
@@ -38,5 +31,4 @@
         </div>
     </div>
 }
-
 
