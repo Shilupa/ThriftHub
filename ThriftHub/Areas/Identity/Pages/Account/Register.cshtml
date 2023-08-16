@@ -1,8 +1,7 @@
 ﻿@page
 @model RegisterModel
-
 @{
-    ViewData["Title"] = "Create an account";
+    ViewData["Title"] = "Register";
 }
 
 <!DOCTYPE html>
@@ -31,13 +30,13 @@
             color: #333;
         }
 
-        .register-header::after {
-            content: '';
-            display: block;
-            width: 280px;
-            margin: auto;
-            border-bottom: 4px solid #2e7d32;
-        }
+            .register-header::after {
+                content: '';
+                display: block;
+                width: 230px;
+                margin: auto;
+                border-bottom: 4px solid #2e7d32;
+            }
 
         .register-form {
             padding: 10px;
@@ -81,28 +80,92 @@
         <div class="register-header">
             <h2>@ViewData["Title"]</h2>
         </div>
-        <form asp-page="Register" method="post" class="register-form">
-            <div asp-validation-summary="All" class="text-danger"></div>
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="register-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- First Name -->
             <div class="form-group">
-                <label class="form-label" asp-for="Input.Email">Email</label>
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <label class="form-label" asp-for="Input.FirstName">First Name</label>
+                <input class="form-control" id="Name" asp-for="Input.FirstName" maxlength="50" />
+                <span class="text-danger" asp-validation-for="Input.FirstName"></span>
             </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.LastName">Last Name</label>
+                <input class="form-control" id="Name" asp-for="Input.LastName" maxlength="50" />
+                <span class="text-danger" asp-validation-for="Input.LastName"></span>
+            </div>
+
+            <!-- Password -->
             <div class="form-group">
                 <label class="form-label" asp-for="Input.Password">Password</label>
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                <input class="form-control" asp-for="Input.Password" maxlength="50" />
+                <span class="text-danger" asp-validation-for="Input.Password"></span>
             </div>
+
+            <!-- Confirm Password -->
             <div class="form-group">
                 <label class="form-label" asp-for="Input.ConfirmPassword">Confirm Password</label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" />
+                <input type="password" asp-for="Input.ConfirmPassword" autocomplete="off" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn register-btn">Register</button>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.Email">Email</label>
+                <input class="form-control" id="Email" asp-for="Input.Email" />
+                <span class="text-danger" asp-validation-for="Input.Email"></span>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.PhoneNumber">Phone Number</label>
+                <input class="form-control" id="Phone" asp-for="Input.PhoneNumber" />
+                <span class="text-danger" asp-validation-for="Input.PhoneNumber"></span>
+            </div>
+
+            <!-- Street Address -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.StreetAddress">Street Address</label>
+                <input class="form-control" id="Address" asp-for="Input.StreetAddress" />
+                <span class="text-danger" asp-validation-for="Input.StreetAddress"></span>
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.City">City</label>
+                <input class="form-control" id="City" asp-for="Input.City" />
+                <span class="text-danger" asp-validation-for="Input.City"></span>
+            </div>
+
+            <!-- Postal Code -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.PostalCode">Postal Code</label>
+                <input class="form-control" id="Zip" asp-for="Input.PostalCode" maxlength="9" />
+                <span class="text-danger" asp-validation-for="Input.PostalCode"></span>
+            </div>
+
+            <!-- Role -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.Role">Role</label>
+                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                    <option disabled selected>--Select Role--</option>
+                </select>
+            </div>
+
+            <!-- Register Button -->
+            <button id="registerSubmit" type="submit" class="btn btn register-btn">Register</button>
+
+            <!-- Login Link -->
             <div class="login-link">
-                <p>Already have an account? <a asp-page="Login">Log in</a></p>
+                <p>Already have an account? <a asp-page="Login" asp-route-returnUrl="@Model.ReturnUrl">Log in</a></p>
             </div>
         </form>
     </div>
 </body>
 </html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

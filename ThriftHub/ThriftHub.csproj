@@ -55,4 +55,7 @@
     <Content Remove="wwwroot\images\" />
     <Content Remove="wwwroot\images\products\" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
 </Project>

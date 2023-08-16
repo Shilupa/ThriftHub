@@ -9,12 +9,15 @@
     <link rel="stylesheet" href="~/ThriftHub.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">ThriftHub</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="~/images/thrifthub.png" alt="logo" style="max-width: 100px; max-height: 50px;">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -44,13 +47,14 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <partial name="_Notification" />
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - ThriftHub - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2023 - ThriftHub - <a asp-area="" asp-page="/Privacy" class="text-success">Privacy</a>
         </div>
     </footer>
 

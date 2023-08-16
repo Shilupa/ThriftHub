@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using DataAccess;
 using Infrastructure;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProvid
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<DbInitializer>();
 builder.Services.AddScoped<UnitOfWork>();
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
+
 
 var app = builder.Build();
 
