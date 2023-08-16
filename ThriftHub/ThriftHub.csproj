@@ -28,4 +28,10 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Pages\Fashion\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Fashion\" />
+  </ItemGroup>
 </Project>
