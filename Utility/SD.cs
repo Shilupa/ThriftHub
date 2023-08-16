@@ -12,6 +12,14 @@ namespace Utility
         public const string StatusShipped = "Shipped";
         public const string StatusCancelled = "Cancelled";
         public const string StatusRefunded = "Refunded";
+
+        public const int FashionId = 1;
+        public const int ElectronicsId = 2;
+        public const int FurnitureId = 3;
+        public const int SportsId = 4;
+        public const int HealthId = 5;
+        public const int MiscId = 6;
+
     }
 }
 

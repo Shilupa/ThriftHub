@@ -32,7 +32,28 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Pages\Fashion\" />
+    <None Remove="Pages\UploadProduct\" />
+    <None Remove="Pages\ProductDetails\" />
+    <None Remove="Pages\Electronics\" />
+    <None Remove="Pages\Furniture\" />
+    <None Remove="Pages\Health\" />
+    <None Remove="Pages\Miscellaneous\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Fashion\" />
+    <Folder Include="Pages\UploadProduct\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\products\" />
+    <Folder Include="Pages\ProductDetails\" />
+    <Folder Include="Pages\Electronics\" />
+    <Folder Include="Pages\Furniture\" />
+    <Folder Include="Pages\Health\" />
+    <Folder Include="Pages\Miscellaneous\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Remove="wwwroot\images\" />
+    <Content Remove="wwwroot\images\products\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\images\" />

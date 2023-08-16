@@ -1,0 +1,42 @@
+﻿@page
+@model ThriftHub.Pages.Fashion.IndexModel
+@{
+    <div class="container">
+        <div class="row pt=4">
+            <!--Start Row-->
+            <div class="col-6">
+                <!--50% of row-->
+                @*<p>Application User ID: @Model.ApplicationUserId</p>
+                    <p>Application Username: @Model.ApplicationUsername</p>
+                    <p>Application Username: @Model.FirstName</p>*@
+            </div><!-- End 1st Column-->
+            <div class="col-6 text-end">
+                <!--50% row right justified-->
+                <a asp-page="../UploadProduct/Upsert" asp-route-id="0" asp-route-pageName="Fashion" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Create New Product
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var obj in Model.filteredProducts)
+            {
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card">
+                        <a asp-page="../ProductDetails/Index" asp-route-productId="@obj.Id" asp-route-pageName="Fashion">
+                            <img src="@obj.ImageUrl" class="card-img-top" alt="@obj.Name" />
+                        </a>
+
+                        <div class="card-body">
+                            <h5 class="card-title">@obj.Name</h5>
+                            <h5 class="card-title">@obj.ApplicationUser?.FirstName</h5>
+
+                            <!-- Add more details about the product here if needed -->
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
