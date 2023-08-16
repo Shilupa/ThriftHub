@@ -30,8 +30,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Pages\Fashion\" />
+    <None Remove="Pages\UploadProduct\" />
+    <None Remove="Pages\DeleteProduct\" />
+    <None Remove="Pages\ProductDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\Fashion\" />
+    <Folder Include="Pages\UploadProduct\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\products\" />
+    <Folder Include="Pages\DeleteProduct\" />
+    <Folder Include="Pages\ProductDetails\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\images\" />
+    <Content Remove="wwwroot\images\products\" />
   </ItemGroup>
 </Project>

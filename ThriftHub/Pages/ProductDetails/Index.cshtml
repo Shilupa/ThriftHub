@@ -1,0 +1,29 @@
+﻿@page
+@model ThriftHub.Pages.ProductDetails.IndexModel
+@{
+}
+
+<div class="card container pt-4">
+    <img src="@Model.objProduct.ImageUrl" width="900" height="500" class="card-img-top rounded" />
+
+
+    <div class="col-12 col-md-6">
+        <h1 class="text-white-50">@Model.objProduct.Name</h1>
+    </div>
+    <div class="col-12 col-md-6 text-end pt-4">
+        <span class="badge bg-warning pt-2" style="height: 30px;">@Model.objProduct.Category?.Name</span>
+        <p class="text-secondary">@Model.objProduct.Description</p>
+    </div>
+    <p class="text-secondary">@Model.applicationUserId</p>
+    <p class="text-secondary">@Model.objUser.Id</p>
+    <div class="row pt-2">
+        <div class="col-6 col-md-3">
+            <button type="submit" class="btn btn-danger form-control">Delete</button>
+        </div>
+        <div class="col-6 col-md-3">
+            <a asp-page="Index" class="btn btn-outline-primary border  form-control">
+                Back to List
+            </a>
+        </div>
+    </div>
+</div>

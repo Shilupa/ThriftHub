@@ -6,45 +6,37 @@
             <!--Start Row-->
             <div class="col-6">
                 <!--50% of row-->
-                <h2 class="text-primary">
-                    Product List
-                </h2>
+                @*<p>Application User ID: @Model.ApplicationUserId</p>
+                    <p>Application Username: @Model.ApplicationUsername</p>
+                    <p>Application Username: @Model.FirstName</p>*@
             </div><!-- End 1st Column-->
             <div class="col-6 text-end">
                 <!--50% row right justified-->
-                <a asp-page="Upsert" asp-route-id="0" class="btn btn-primary">
+                <a asp-page="../UploadProduct/Upsert" asp-route-id="0" asp-route-pageName="Fashion" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i> Create New Product
                 </a>
-            </div> <!--End 2nd Column-->
-        </div> <!--End Row-->
-        <table class="table table-bordered table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>
-                        Product Name
-                    </th>
-                    <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                @*@foreach (var obj in Model.objProductList)
-                {
-                    <tr>
-                        <td width="80%">@obj.Name</td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-page="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil-square"></i> Edit
-                                </a>
-                                <a asp-page="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
-                                    <i class="bi bi-trash-fill"></i> Delete
-                                </a>
-                            </div>
-                        </td>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var obj in Model.objProductList)
+            {
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card">
+                        <a asp-page="../ProductDetails/Index" asp-route-productId="@obj.Id" asp-route-pageName="Fashion">
+                            <img src="@obj.ImageUrl" class="card-img-top" alt="@obj.Name" />
+                        </a>
 
-                    </tr>
-                }*@
-            </tbody>
-        </table>
-    </div> <!--Close Container-->
+                        <div class="card-body">
+                            <h5 class="card-title">@obj.Name</h5>
+                            <h5 class="card-title">@obj.ApplicationUser?.FirstName</h5>
+
+                            <!-- Add more details about the product here if needed -->
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 }
+
+

@@ -2,6 +2,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using DataAccess;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +22,10 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<DbInitializer>();
+builder.Services.AddScoped<UnitOfWork>();
 
 var app = builder.Build();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -33,11 +36,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapRazorPages();
 // SeedDatabase();
 app.Run();
