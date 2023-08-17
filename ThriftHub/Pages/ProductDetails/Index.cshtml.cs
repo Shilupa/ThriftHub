@@ -24,6 +24,7 @@ namespace ThriftHub.Pages.ProductDetails
 
         public IActionResult OnGet(int productId)
         {
+            Console.Write("myGetsfefef");
             if (productId != 0)
             {
                 objProduct = _unitOfWork.Product.Get(p => p.Id == productId, includes: "Category");
@@ -39,12 +40,12 @@ namespace ThriftHub.Pages.ProductDetails
 
         public IActionResult OnPost()
         {
-
+            Console.Write("Hellosssfefef");
             _unitOfWork.Product.Delete(objProduct);
 
             _unitOfWork.Commit();
 
-            return RedirectToPage("../Fashion/Index");
+            return RedirectToPage("../Profile/Index");
         }
     }
 }

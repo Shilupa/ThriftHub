@@ -5,7 +5,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<IdentityUser> UserManager
 
-<div class="card container pt-4">
+<form method="post" class="card container pt-4">
     <img src="@Model.objProduct.ImageUrl" width="900" height="500" class="card-img-top rounded" />
 
 
@@ -29,9 +29,10 @@
 
     @if (@UserManager.GetUserId(User)! == @Model.objProduct.ApplicationUserId)
     {
-        <div class="col-6 col-md-3">
-            <button type="submit" class="btn btn-danger form-control">Delete</button>
-        </div>
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+                </div>
+       
     }
     else
     {
@@ -41,5 +42,4 @@
             </a>
         </div>
     }
-
-</div>
+</form>
