@@ -1,0 +1,171 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .register-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+            .register-header::after {
+                content: '';
+                display: block;
+                width: 230px;
+                margin: auto;
+                border-bottom: 4px solid #2e7d32;
+            }
+
+        .register-form {
+            padding: 10px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .register-btn {
+            width: 100%;
+            margin-top: 20px;
+            background-color: #2e7d32;
+            border-color: #2e7d32;
+            color: #ffffff;
+        }
+
+            .register-btn:hover {
+                background-color: #255d28;
+                border-color: #255d28;
+                color: #ffffff;
+            }
+
+        .login-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+            .login-link a {
+                color: #2e7d32;
+            }
+
+                .login-link a:hover {
+                    color: #2e7d32;
+                }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="register-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- First Name -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.FirstName">First Name</label>
+                <input class="form-control" id="Name" asp-for="Input.FirstName" maxlength="50" />
+                <span class="text-danger" asp-validation-for="Input.FirstName"></span>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.LastName">Last Name</label>
+                <input class="form-control" id="Name" asp-for="Input.LastName" maxlength="50" />
+                <span class="text-danger" asp-validation-for="Input.LastName"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.Password">Password</label>
+                <input class="form-control" asp-for="Input.Password" maxlength="50" />
+                <span class="text-danger" asp-validation-for="Input.Password"></span>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <input type="password" asp-for="Input.ConfirmPassword" autocomplete="off" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.Email">Email</label>
+                <input class="form-control" id="Email" asp-for="Input.Email" />
+                <span class="text-danger" asp-validation-for="Input.Email"></span>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.PhoneNumber">Phone Number</label>
+                <input class="form-control" id="Phone" asp-for="Input.PhoneNumber" />
+                <span class="text-danger" asp-validation-for="Input.PhoneNumber"></span>
+            </div>
+
+            <!-- Street Address -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.StreetAddress">Street Address</label>
+                <input class="form-control" id="Address" asp-for="Input.StreetAddress" />
+                <span class="text-danger" asp-validation-for="Input.StreetAddress"></span>
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.City">City</label>
+                <input class="form-control" id="City" asp-for="Input.City" />
+                <span class="text-danger" asp-validation-for="Input.City"></span>
+            </div>
+
+            <!-- Postal Code -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.PostalCode">Postal Code</label>
+                <input class="form-control" id="Zip" asp-for="Input.PostalCode" maxlength="9" />
+                <span class="text-danger" asp-validation-for="Input.PostalCode"></span>
+            </div>
+
+            <!-- Role -->
+            <div class="form-group">
+                <label class="form-label" asp-for="Input.Role">Role</label>
+                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                    <option disabled selected>--Select Role--</option>
+                </select>
+            </div>
+
+            <!-- Register Button -->
+            <button id="registerSubmit" type="submit" class="btn btn register-btn">Register</button>
+
+            <!-- Login Link -->
+            <div class="login-link">
+                <p>Already have an account? <a asp-page="Login" asp-route-returnUrl="@Model.ReturnUrl">Log in</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
