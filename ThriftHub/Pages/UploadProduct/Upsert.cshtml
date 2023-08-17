@@ -25,7 +25,7 @@
                     </div>
                     <div class="mb-3 col-6">
                         <label asp-for="objProduct.Price"></label>
-                        <input id="txtUPC" asp-for="objProduct.Price" class="form-control" />
+                        <input id="txtPrice" asp-for="objProduct.Price" class="form-control" />
                     </div>
                     <div class="mb-3">
                         <label asp-for="objProduct.ImageUrl"></label>
@@ -104,6 +104,11 @@
                 if ($('#ddlCategory option:selected').val() == 0) {
                     swal.fire('Error', 'Please Select a Catagory', 'error')
                     return false
+                }
+
+                if ($('#txtPrice').val() < 0.1) {
+                    swal.fire('Error', 'Please Enter a List Price Greater Than 0.1€', 'error');
+                    return false;
                 }
 
                 if ($('#ddlQuantity option:selected').val() < 1) {
