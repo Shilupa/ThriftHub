@@ -1,11 +1,29 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Second-Hand Marketplace";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<div class="container">
+    <div class="search-sort-container">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <select id="sortSelect">
+            <option value="date">Date</option>
+            <option value="price">Price</option>
+        </select>
+        <button id="searchButton">Search</button>
+    </div>
+    <div class="results-container">
+        <ul id="resultsList">
+            <!-- Search results will be populated here -->
+        </ul>
+    </div>
 </div>
 
+@section Scripts {
+    <script src="~/js/indexScript.js"></script>
+}
