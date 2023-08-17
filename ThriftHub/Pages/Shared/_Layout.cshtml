@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Utility;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,21 +26,13 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Fashion/Index">Fashion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Electronics/Index">Electronics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Furniture/Index">Furniture</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Health/Index">Health</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Miscellaneous/Index">Miscellaneous</a>
-                        </li>
+                        @foreach (var pageName in SD.PageList)
+                        {
+                            var index = SD.PageList.IndexOf(pageName) + 1;
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-route-categoryId="@index" asp-page="/@pageName/Index">@pageName</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
