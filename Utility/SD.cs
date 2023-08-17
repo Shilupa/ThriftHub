@@ -1,8 +1,8 @@
 ﻿using System;
 namespace Utility
 {
-	public class SD
-	{
+    public class SD
+    {
         public const string AdminRole = "Admin";
         public const string CustomerRole = "Customer";
         public const string PaymentStatusPending = "Payment Pending";
@@ -19,7 +19,7 @@ namespace Utility
         public const int SportsId = 4;
         public const int HealthId = 5;
         public const int MiscId = 6;
-
+        public static readonly List<string> PageList = new List<string> { "Fashion", "Electronics", "Furniture","Sports", "Health", "Miscellaneous"};
     }
 }
 

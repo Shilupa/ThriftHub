@@ -27,7 +27,7 @@ namespace ThriftHub.Pages.ProductDetails
             Console.Write("myGetsfefef");
             if (productId != 0)
             {
-                objProduct = _unitOfWork.Product.Get(p => p.Id == productId, includes: "Category");
+                objProduct = _unitOfWork.Product.Get(p => p.Id == productId, includes: "Category,ApplicationUser");
                 objUser = _unitOfWork.ApplicationUser.Get(u => u.Id == objProduct.ApplicationUserId);
             }
 
