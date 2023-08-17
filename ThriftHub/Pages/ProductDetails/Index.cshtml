@@ -16,11 +16,10 @@
             <span class="badge bg-warning pt-2" style="height: 30px;">@Model.objProduct.Category?.Name: Name</span>
             <p class="text-secondary">@Model.objProduct.Description</p>
         </div>
-        <p class="text-secondary">@Model.objProduct.Description Description</p>
+        <p class="text-secondary">Descrition: @Model.objProduct.Description</p>
         <p class="text-secondary">@Model.objProduct.Price Price</p>
         <p class="text-secondary">@Model.objProduct.Quantity Quantity</p>
         <p class="text-secondary">@Model.objProduct.PublishedDate Published Date</p>
-        <p>@Model.objProduct.Category?.Name</p>
         <input type="hidden" asp-for="objProduct.ApplicationUserId" />
         <input type="hidden" asp-for="objProduct.Id" />
         @if (Model.objProduct.CategoryId != 0)

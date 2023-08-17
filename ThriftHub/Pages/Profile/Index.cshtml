@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Profile";
 }
+@using Utility;
 
 <style>
     .btn-green {
@@ -24,6 +25,17 @@
                 <div class="card-body">
                     <h5 class="card-title">@Model.objUser.FirstName @Model.objUser.LastName</h5>
                     <p class="card-text">@Model.objUser.Email</p>
+
+                    @if (User.IsInRole(SD.AdminRole))
+                    {
+                        foreach (var user in Model.applicationUserList)
+                        {
+                            <p>
+                                <span>@user.FirstName</span>
+                                <button class="btn btn-danger btn-sm" >Delete User</button>
+                            </p>
+                        }
+                    }
                 </div>
             </div>
         </div>

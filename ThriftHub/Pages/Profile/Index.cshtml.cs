@@ -16,11 +16,12 @@ namespace ThriftHub.Pages.Profile
         [BindProperty]
         public ApplicationUser objUser { get; set; }
         public string? applicationUserId { get; set; }
-
+        public IEnumerable<ApplicationUser> applicationUserList;
         public IndexModel(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             objUser = new ApplicationUser();
+            applicationUserList = new List<ApplicationUser>();
         }
 
         public IActionResult OnGet()
@@ -29,9 +30,8 @@ namespace ThriftHub.Pages.Profile
             //ApplicationUsername = User.FindFirstValue(ClaimTypes.Name);
             //FirstName = User.FindFirstValue(ClaimTypes.GivenName);
             applicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Console.Write("myGetsfefef");
             objUser = _unitOfWork.ApplicationUser.Get(u => u.Id == applicationUserId);
-
+            applicationUserList = _unitOfWork.ApplicationUser.GetAll();
             return Page();
         }
     }
