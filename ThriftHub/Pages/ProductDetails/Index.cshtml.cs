@@ -11,24 +11,19 @@ namespace ThriftHub.Pages.ProductDetails
         private readonly UnitOfWork _unitOfWork;
         [BindProperty]
         public Product objProduct { get; set; }
-
-        [BindProperty]
-        public ApplicationUser objUser { get; set; }
+        public string routingPage { get; set; }
 
         public IndexModel(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             objProduct = new Product();
-            objUser = new ApplicationUser();
         }
 
         public IActionResult OnGet(int productId)
         {
-            Console.Write("myGetsfefef");
             if (productId != 0)
             {
                 objProduct = _unitOfWork.Product.Get(p => p.Id == productId, includes: "Category,ApplicationUser");
-                objUser = _unitOfWork.ApplicationUser.Get(u => u.Id == objProduct.ApplicationUserId);
             }
 
             if (objProduct == null)
@@ -40,12 +35,12 @@ namespace ThriftHub.Pages.ProductDetails
 
         public IActionResult OnPost()
         {
-            Console.Write("Hellosssfefef");
+            string? pageName = objProduct.Category?.Name;
+            int? categoryId = objProduct.Category?.CategoryId;
             _unitOfWork.Product.Delete(objProduct);
-
             _unitOfWork.Commit();
 
-            return RedirectToPage("../Profile/Index");
+            return RedirectToPage("../Fashion/Index", new { categoryId = 1 });
         }
     }
 }

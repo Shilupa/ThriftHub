@@ -25,6 +25,9 @@ namespace ThriftHub.Pages.Profile
 
         public IActionResult OnGet()
         {
+            //ApplicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //ApplicationUsername = User.FindFirstValue(ClaimTypes.Name);
+            //FirstName = User.FindFirstValue(ClaimTypes.GivenName);
             applicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             Console.Write("myGetsfefef");
             objUser = _unitOfWork.ApplicationUser.Get(u => u.Id == applicationUserId);
