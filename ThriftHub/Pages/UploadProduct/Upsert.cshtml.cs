@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 
 namespace ThriftHub.Pages.UploadProduct
 {
@@ -18,7 +19,6 @@ namespace ThriftHub.Pages.UploadProduct
         public string? applicationUserId { get; private set; }
         public IEnumerable<SelectListItem> CategoryList { get; set; }
         public DateTime currentDate { get; set; } = DateTime.Now;
-        public string? routingPage { get; private set; }
 
         public UpsertModel(UnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
@@ -28,10 +28,9 @@ namespace ThriftHub.Pages.UploadProduct
             CategoryList = new List<SelectListItem>();
         }
 
-        public IActionResult OnGet(int? id, string pageName)
+        public IActionResult OnGet(int? id)
         {
             // Fetching Application userID
-            routingPage = pageName; 
             applicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             CategoryList = _unitOfWork.Category.GetAll()
@@ -62,7 +61,7 @@ namespace ThriftHub.Pages.UploadProduct
             return Page();
         }
 
-        public IActionResult OnPost(int? id)
+        public IActionResult OnPost(int? id, string pageName)
         {
             applicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             string webRootPath = _webHostEnvironment.WebRootPath;
@@ -165,9 +164,8 @@ namespace ThriftHub.Pages.UploadProduct
             }
             //Save Changes to Database
             _unitOfWork.Commit();
-
             //redirect to the Products Page
-            return RedirectToPage("../Fashion/Index");
+            return RedirectToPage("/Fashion/Index", new { categoryId = 1 });
         }
     }
 }

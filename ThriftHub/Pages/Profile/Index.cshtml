@@ -1,0 +1,11 @@
+﻿@page
+@model ThriftHub.Pages.Profile.IndexModel
+@{
+}
+
+<p>@Model.applicationUserId</p>
+<p>@Model.objUser.Id</p>
+
+@*For admin authoritties
+    @if (User.IsInRole(SD.AdminRole))
+        { }*@

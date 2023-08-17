@@ -39,6 +39,8 @@
     <None Remove="Pages\Furniture\" />
     <None Remove="Pages\Health\" />
     <None Remove="Pages\Miscellaneous\" />
+    <None Remove="Pages\Sports\" />
+    <None Remove="Pages\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\Fashion\" />
@@ -50,6 +52,8 @@
     <Folder Include="Pages\Furniture\" />
     <Folder Include="Pages\Health\" />
     <Folder Include="Pages\Miscellaneous\" />
+    <Folder Include="Pages\Sports\" />
+    <Folder Include="Pages\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\images\" />
