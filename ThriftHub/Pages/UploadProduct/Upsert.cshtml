@@ -21,7 +21,7 @@
                     </div>
                     <div class="mb-3">
                         <label asp-for="objProduct.Description"></label>
-                        <input asp-for="objProduct.Description" id="txtDesc" rows="3" class="form-control"/>
+                        <input asp-for="objProduct.Description" id="txtDesc" rows="3" class="form-control" />
                     </div>
                     <div class="mb-3 col-6">
                         <label asp-for="objProduct.Price"></label>
@@ -51,11 +51,11 @@
                     <div class="col-12">
                         @if (Model.objProduct.Id != 0)
                         {
-                            <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+                            <button type="submit" style="background-color: #2e7d32; border-color: #2e7d32; color: #ffffff; width: 150px" class="btn btn-primary">Update</button>
                         }
                         else
                         {
-                            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+                            <button type="submit" style="background-color: #2e7d32; border-color: #2e7d32; color: #ffffff;" onclick="return ValidateInput()" class="btn btn-primary width:150px">Create</button>
 
                         }
                         @{
@@ -69,7 +69,7 @@
                                 pageRoute = "../Index";
                             }
                         }
-                        <a asp-page="@pageRoute" sp-route-productId="@Model.objProduct.Id" class="btn btn-secondary" style="width:150px">
+                        <a asp-page="@pageRoute" style="background-color: #2e7d32; border-color: #2e7d32; color: #ffffff;" asp-route-productId="@Model.objProduct.Id" class="btn btn-secondary" style="width:150px">
                             Back to List
                         </a>
                     </div>
@@ -102,7 +102,7 @@
                 return false;
             }
 
-            if (tinyMCE.get('txtDesc').getContent() == "") {
+            if (document.getElementById('txtDesc').value == "") {
                 swal.fire('Error', 'Please Enter a Product Description', 'error');
                 return false;
             }
@@ -130,4 +130,3 @@
             return true;
         }</script>
 }
-

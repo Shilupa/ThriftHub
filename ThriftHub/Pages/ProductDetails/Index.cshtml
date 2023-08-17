@@ -2,7 +2,32 @@
 @model ThriftHub.Pages.ProductDetails.IndexModel
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<IdentityUser> UserManager
+<style>
+    /* Global styling */
+    body {
+        background-color: #f8f9fa;
+    }
 
+    /* Card styling */
+    .card {
+        border: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 20px;
+        margin: 20px;
+    }
+
+    /* Green button style */
+    .btn-green {
+        background-color: #28a745;
+        color: white;
+        border: none;
+    }
+
+        .btn-green:hover {
+            background-color: #218838;
+        }
+</style>
 @{
 
     <form method="post" class="card container pt-4">
@@ -13,13 +38,13 @@
             <h1 class="text-white-50">@Model.objProduct.Name</h1>
         </div>
         <div class="col-12 col-md-6 text-end pt-4">
-            <span class="badge bg-warning pt-2" style="height: 30px;">@Model.objProduct.Category?.Name: Name</span>
             <p class="text-secondary">@Model.objProduct.Description</p>
         </div>
         <p class="text-secondary">Descrition: @Model.objProduct.Description</p>
-        <p class="text-secondary">@Model.objProduct.Price Price</p>
-        <p class="text-secondary">@Model.objProduct.Quantity Quantity</p>
-        <p class="text-secondary">@Model.objProduct.PublishedDate Published Date</p>
+        <p class="text-secondary">Price: @Model.objProduct.Price</p>
+        <p class="text-secondary">Quantity: @Model.objProduct.Quantity</p>
+        <p class="text-secondary">Published Date: @Model.objProduct.PublishedDate </p>
+        <p class="text-secondary">Published by: @Model.objProduct.ApplicationUser?.FirstName </p>
         <input type="hidden" asp-for="objProduct.ApplicationUserId" />
         <input type="hidden" asp-for="objProduct.Id" />
         @if (Model.objProduct.CategoryId != 0)
@@ -30,12 +55,12 @@
         @if (@UserManager.GetUserId(User)! == @Model.objProduct.ApplicationUserId)
         {
             <div class="col-6 col-md-3">
-                <a asp-page="/UploadProduct/Upsert" asp-route-id="@Model.objProduct.Id" class="btn btn-outline-primary border  form-control">
+                <a asp-page="/UploadProduct/Upsert" style="background-color: #2e7d32; border-color: #2e7d32; color: #ffffff;" asp-route-id="@Model.objProduct.Id" class="btn btn-outline-primary border  form-control">
                     Update
                 </a>
             </div>
             <div class="col-6 col-md-3">
-                <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+                <button type="submit" class="btn btn-primary  btn-danger" style="width: 150px;">Delete</button>
             </div>
 
         }
@@ -48,7 +73,7 @@
             </div>
         }
         <div class="col-6 col-md-3">
-            <a asp-page="../@Model.objProduct.Category?.Name/Index" asp-route-categoryId="@Model.objProduct.Category?.CategoryId" class="btn btn-outline-primary border  form-control">
+            <a asp-page="../@Model.objProduct.Category?.Name/Index" style="background-color: #2e7d32; border-color: #2e7d32; color: #ffffff;" asp-route-categoryId="@Model.objProduct.Category?.CategoryId" class="btn btn-outline-primary border  form-control">
                 Back to Product List
             </a>
         </div>
