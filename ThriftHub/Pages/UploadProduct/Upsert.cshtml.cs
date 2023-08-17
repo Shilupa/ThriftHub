@@ -165,7 +165,7 @@ namespace ThriftHub.Pages.UploadProduct
             //Save Changes to Database
             _unitOfWork.Commit();
             //redirect to the Products Page
-            return RedirectToPage("/Fashion/Index", new { categoryId = 1 });
+            return RedirectToPage("../Index");
         }
     }
 }

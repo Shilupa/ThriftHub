@@ -47,11 +47,11 @@
                     Add To Basket
                 </a>
             </div>
-            <div class="col-6 col-md-3">
-                <a asp-page="../@Model.objProduct.Category?.Name/Index" asp-route-categoryId="@Model.objProduct.Category?.CategoryId" class="btn btn-outline-primary border  form-control">
-                    Back to List
-                </a>
-            </div>
         }
+        <div class="col-6 col-md-3">
+            <a asp-page="../@Model.objProduct.Category?.Name/Index" asp-route-categoryId="@Model.objProduct.Category?.CategoryId" class="btn btn-outline-primary border  form-control">
+                Back to Product List
+            </a>
+        </div>
     </form>
 }

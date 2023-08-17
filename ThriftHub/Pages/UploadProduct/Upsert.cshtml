@@ -55,10 +55,21 @@
                         }
                         else
                         {
-                            <button type="submit"  onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+                            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
 
                         }
-                        <a asp-page="/ProductDetails/Index"  asp-route-id="@Model.objProduct.Id" class="btn btn-secondary" style="width:150px">
+                        @{
+                            var pageRoute = "";
+                            if (Model.objProduct.Id != 0)
+                            {
+                                pageRoute = "../ProductDetails/Index";
+                            }
+                            else
+                            {
+                                pageRoute = "../Index";
+                            }
+                        }
+                        <a asp-page="@pageRoute" sp-route-productId="@Model.objProduct.Id" class="btn btn-secondary" style="width:150px">
                             Back to List
                         </a>
                     </div>
@@ -76,47 +87,47 @@
 
 
 @section Scripts{
-        <script>tinymce.init({
-                selector: 'textarea',
-                plugins: "lists",
-                menubar: "file edit format"
-            });
+    <script>tinymce.init({
+            selector: 'textarea',
+            plugins: "lists",
+            menubar: "file edit format"
+        });
 
-            function ValidateInput() {
+        function ValidateInput() {
 
 
 
-                if (document.getElementById('txtName').value == "") {
-                    swal.fire('Error', 'Please Enter a Product Name', 'error');
-                    return false;
-                }
+            if (document.getElementById('txtName').value == "") {
+                swal.fire('Error', 'Please Enter a Product Name', 'error');
+                return false;
+            }
 
-                if (tinyMCE.get('txtDesc').getContent() == "") {
-                    swal.fire('Error', 'Please Enter a Product Description', 'error');
-                    return false;
-                }
+            if (tinyMCE.get('txtDesc').getContent() == "") {
+                swal.fire('Error', 'Please Enter a Product Description', 'error');
+                return false;
+            }
 
-                if (document.getElementById("uploadBox").value == "") {
-                    swal.fire('Error', 'Please Select an Image', 'error')
-                    return false
-                }
+            if (document.getElementById("uploadBox").value == "") {
+                swal.fire('Error', 'Please Select an Image', 'error')
+                return false
+            }
 
-                if ($('#ddlCategory option:selected').val() == 0) {
-                    swal.fire('Error', 'Please Select a Catagory', 'error')
-                    return false
-                }
+            if ($('#ddlCategory option:selected').val() == 0) {
+                swal.fire('Error', 'Please Select a Catagory', 'error')
+                return false
+            }
 
-                if ($('#txtPrice').val() < 0.1) {
-                    swal.fire('Error', 'Please Enter a List Price Greater Than 0.1€', 'error');
-                    return false;
-                }
+            if ($('#txtPrice').val() < 0.1) {
+                swal.fire('Error', 'Please Enter a List Price Greater Than 0.1€', 'error');
+                return false;
+            }
 
-                if ($('#ddlQuantity option:selected').val() < 1) {
-                    swal.fire('Error', 'Please Select a Quantity', 'error')
-                    return false
-                }
+            if ($('#ddlQuantity option:selected').val() < 1) {
+                swal.fire('Error', 'Please Select a Quantity', 'error')
+                return false
+            }
 
-                return true;
-            }</script>
+            return true;
+        }</script>
 }
 
