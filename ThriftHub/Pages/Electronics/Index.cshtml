@@ -1,30 +1,62 @@
 ﻿@page
 @model ThriftHub.Pages.CommonIndexModel
-@{
-    <div class="container">
-        <div class="row">
-            @foreach (var obj in Model.objProductList)
-            {
-                <div class="col-12 col-md-6 col-lg-3 mb-4">
-                    <div class="card">
-                        <a asp-page="../ProductDetails/Index" asp-route-productId="@obj.Id">
-                            <img src="@obj.ImageUrl" class="card-img-top" alt="@obj.Name" />
-                        </a>
 
-                        <div class="card-body">
-                            <h5 class="card-title">@obj.Name</h5>
-                            <h2>@obj.Category?.Name</h2>
-                            <p class="text-secondary">@obj.Description Description</p>
-                            <p class="text-secondary">@obj.Price Price</p>
-                            <p class="text-secondary">@obj.Quantity Quantity</p>
-                            <p class="text-secondary">@obj.PublishedDate Published Date</p>
-                            <p class="text-secondary">@obj.ApplicationUser?.FirstName: Posted by</p>
-                            <!-- Add more details about the product here if needed -->
+<style>
+    /* Global styling */
+    body {
+        background-color: #f8f9fa;
+    }
+
+    /* Card styling */
+    .card {
+        border: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 20px;
+        margin: 20px;
+    }
+
+    /* Green button style */
+    .btn-green {
+        background-color: #28a745;
+        color: white;
+        border: none;
+    }
+
+        .btn-green:hover {
+            background-color: #218838;
+        }
+</style>
+
+<div class="container">
+    <div class="row">
+        @foreach (var obj in Model.objProductList)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <a asp-page="../ProductDetails/Index" asp-route-productId="@obj.Id">
+                        <img src="@obj.ImageUrl" class="card-img-top" alt="@obj.Name" />
+                    </a>
+
+                    <div class="card-body">
+                        <!-- Product details -->
+                        <h4 class="card-title">@obj.Name</h4>
+                        <h6 class="text-muted">@obj.Category?.Name</h6>
+                        <p class="card-text">@obj.Description Description</p>
+                        <p class="card-text">@obj.Price Price</p>
+                        <p class="card-text">@obj.Quantity Quantity</p>
+                        <p class="text-muted">@obj.PublishedDate Published Date</p>
+                        <p class="card-text">@obj.ApplicationUser?.FirstName: Posted by</p>
+
+                        <!-- Add to Basket button -->
+                        <div class="d-grid gap-2 mt-3">
+                            <a asp-page="Index" class="btn btn-green btn-sm">
+                                Add To Basket
+                            </a>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
-}
-
+</div>
