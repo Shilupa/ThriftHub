@@ -25,7 +25,7 @@
                     </div>
                     <div class="mb-3 col-6">
                         <label asp-for="objProduct.Price"></label>
-                        <input id="txtUPC" asp-for="objProduct.Price" class="form-control" />
+                        <input id="txtPrice" asp-for="objProduct.Price" class="form-control" />
                     </div>
                     <div class="mb-3">
                         <label asp-for="objProduct.ImageUrl"></label>
@@ -55,8 +55,7 @@
                         }
                         else
                         {
-                            @*<button type="submit"  onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>*@
-                            <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+                            <button type="submit"  onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
 
                         }
                         <a asp-page="/ProductDetails/Index"  asp-route-id="@Model.objProduct.Id" class="btn btn-secondary" style="width:150px">
@@ -76,7 +75,7 @@
 }
 
 
-@*@section Scripts{
+@section Scripts{
         <script>tinymce.init({
                 selector: 'textarea',
                 plugins: "lists",
@@ -89,31 +88,6 @@
 
                 if (document.getElementById('txtName').value == "") {
                     swal.fire('Error', 'Please Enter a Product Name', 'error');
-                    return false;
-                }
-
-                if (document.getElementById('txtUPC').value == "") {
-                    swal.fire('Error', 'Please Enter a Product UPC', 'error');
-                    return false;
-                }
-
-                if ($('#txtUnitPrice').val() < .01) {
-                    swal.fire('Error', 'Please Enter a Unit Price Greater Than $.01', 'error');
-                    return false;
-                }
-
-                if ($('#txtListPrice').val() < .01) {
-                    swal.fire('Error', 'Please Enter a List Price Greater Than $.01', 'error');
-                    return false;
-                }
-
-                if ($('#txtHalfDozenPrice').val() < .01) {
-                    swal.fire('Error', 'Please Enter a Half Dozen+ Price Greater Than $.01', 'error');
-                    return false;
-                }
-
-                if ($('#txtDozenPrice').val() < .01) {
-                    swal.fire('Error', 'Please Enter a Dozen+ Price Greater Than $.01', 'error');
                     return false;
                 }
 
@@ -132,11 +106,17 @@
                     return false
                 }
 
-                if ($('#ddlManufacturer option:selected').val() == 0) {
-                    swal.fire('Error', 'Please Select a Manufacturer', 'error')
+                if ($('#txtPrice').val() < 0.1) {
+                    swal.fire('Error', 'Please Enter a List Price Greater Than 0.1€', 'error');
+                    return false;
+                }
+
+                if ($('#ddlQuantity option:selected').val() < 1) {
+                    swal.fire('Error', 'Please Select a Quantity', 'error')
                     return false
                 }
 
                 return true;
             }</script>
-    }*@
+}
+
