@@ -8,22 +8,52 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 
-<div class="container">
+<form class="container">
     <div class="search-sort-container">
-        <input type="text" id="searchInput" placeholder="Search...">
-        <select id="sortSelect">
-            <option value="date">Date</option>
-            <option value="price">Price</option>
-        </select>
-        <button id="searchButton">Search</button>
+        <input name="searchTxt" type="text" id="searchInput" placeholder="Search...">
+        <span>
+            <i class="bi bi-search text-success font-weight-bold" style="font-size: 24px; cursor: pointer;" id="searchBtn"></i>
+        </span>
     </div>
     <div class="results-container">
-        <ul id="resultsList">
-            <!-- Search results will be populated here -->
-        </ul>
+        <div class="row pt=4">
+
+            <div class="col-6 text-end">
+                <a asp-page="../UploadProduct/Upsert" asp-route-id="0" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Create New Product
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var obj in Model.objProductList)
+            {
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card">
+                        <a asp-page="/ProductDetails/Index" asp-route-productId="@obj.Id">
+                            <img src="@obj.ImageUrl" class="card-img-top" alt="@obj.Name" />
+                        </a>
+
+                        <div class="card-body">
+                            <h5 class="card-title">@obj.Name</h5>
+                            <h2>@obj.Category?.Name</h2>
+                            <p class="text-secondary">@obj.Description Description</p>
+                            <p class="text-secondary">@obj.Price Price</p>
+                            <p class="text-secondary">@obj.Quantity Quantity</p>
+                            <p class="text-secondary">@obj.PublishedDate Published Date</p>
+                            <p class="text-secondary">@obj.ApplicationUser?.FirstName: Posted by</p>
+                            <!-- Add more details about the product here if needed -->
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
-</div>
+</form>
 
 @section Scripts {
-    <script src="~/js/indexScript.js"></script>
+    <script>$(document).ready(function () {
+            $('#searchBtn').click(function () {
+                $('Form').submit();
+            });
+        });</script>
 }

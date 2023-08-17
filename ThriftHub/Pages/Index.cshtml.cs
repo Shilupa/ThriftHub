@@ -6,48 +6,38 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Data;
+using Infrastructure;
 
 namespace ThriftHub.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly UnitOfWork _unitOfWork;
+        public IEnumerable<Product> objProductList;
 
-        public IndexModel(ApplicationDbContext dbContext)
+        public IndexModel(UnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
+            objProductList = new List<Product>();
         }
 
-        public void OnGet()
+        public IActionResult OnGet(string searchTxt)
         {
-            // Page initialization logic, if needed
-        }
 
-        public JsonResult OnGetGetFilteredResults(string searchTerm, string selectedSort)
-        {
-            IQueryable<Product> query = _dbContext.Products
-                .Include(p => p.Category)
-                .Include(p => p.ApplicationUser);
-
-            if (!string.IsNullOrEmpty(searchTerm))
+            if (String.IsNullOrEmpty(searchTxt))
             {
-                query = query.Where(p =>
-                    p.Name.Contains(searchTerm) || p.Description.Contains(searchTerm));
-            }
+                objProductList = _unitOfWork.Product.GetAll();
 
-            // Apply sorting based on selectedSort
-            if (selectedSort == "date")
+            }
+            else
             {
-                query = query.OrderBy(p => p.PublishedDate);
+                // Search item by product name or description
+                objProductList = _unitOfWork.Product.GetAll()
+     .Where(s =>
+         s.Name?.IndexOf(searchTxt, StringComparison.OrdinalIgnoreCase) >= 0 ||
+         s.Description?.IndexOf(searchTxt, StringComparison.OrdinalIgnoreCase) >= 0);
             }
-            else if (selectedSort == "price")
-            {
-                query = query.OrderBy(p => p.Price);
-            }
-
-            var filteredResults = query.ToList();
-
-            return new JsonResult(filteredResults);
+            return Page();
         }
     }
 }
