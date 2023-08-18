@@ -40,7 +40,7 @@ namespace ThriftHub.Pages.ProductDetails
             _unitOfWork.Product.Delete(objProduct);
             _unitOfWork.Commit();
 
-            return RedirectToPage("../Fashion/Index", new { categoryId = 1 });
+            return RedirectToPage("../Index", new { categoryId = 1 });
         }
     }
 }

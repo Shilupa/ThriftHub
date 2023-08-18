@@ -46,7 +46,6 @@
     <Folder Include="Pages\Fashion\" />
     <Folder Include="Pages\UploadProduct\" />
     <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\images\products\" />
     <Folder Include="Pages\ProductDetails\" />
     <Folder Include="Pages\Electronics\" />
     <Folder Include="Pages\Furniture\" />
@@ -54,6 +53,7 @@
     <Folder Include="Pages\Miscellaneous\" />
     <Folder Include="Pages\Sports\" />
     <Folder Include="Pages\Profile\" />
+    <Folder Include="wwwroot\images\products\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\images\" />

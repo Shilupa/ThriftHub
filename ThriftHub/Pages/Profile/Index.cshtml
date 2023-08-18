@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Profile";
 }
+@using Utility;
 
 <style>
     .btn-green {
@@ -16,14 +17,24 @@
         }
 </style>
 
-<div class="container">
+<form class="container">
     <div class="row">
         <div class="col-md-4">
             <div class="card">
-                @*<img src="@Model.objUser.ProfileImagePath" alt="Profile Image" class="card-img-top">*@
                 <div class="card-body">
                     <h5 class="card-title">@Model.objUser.FirstName @Model.objUser.LastName</h5>
                     <p class="card-text">@Model.objUser.Email</p>
+
+                    @if (User.IsInRole(SD.AdminRole))
+                    {
+                        foreach (var user in Model.applicationUserList)
+                        {
+                            <p>
+                                <span>@user.FirstName</span>
+                                <button type="submit" class="btn btn-danger btn-sm" asp-route-userId="@user.Id">Delete User</button>
+                            </p>
+                        }
+                    }
                 </div>
             </div>
         </div>
@@ -66,4 +77,4 @@
             </div>
         </div>
     </div>
-</div>
+</form>
