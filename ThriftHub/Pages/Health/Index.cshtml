@@ -13,12 +13,9 @@
 
                         <div class="card-body">
                             <h5 class="card-title">@obj.Name</h5>
-                            <h2>@obj.Category?.Name</h2>
-                            <p class="text-secondary">@obj.Description Description</p>
-                            <p class="text-secondary">@obj.Price Price</p>
-                            <p class="text-secondary">@obj.Quantity Quantity</p>
-                            <p class="text-secondary">@obj.PublishedDate Published Date</p>
-                            <p class="text-secondary">@obj.ApplicationUser?.FirstName: Posted by</p>
+                            <h2>@obj.Category.Name</h2>
+                            <h5 class="card-title">@obj.ApplicationUser?.FirstName</h5>
+
                             <!-- Add more details about the product here if needed -->
                         </div>
                     </div>
@@ -27,4 +24,3 @@
         </div>
     </div>
 }
-

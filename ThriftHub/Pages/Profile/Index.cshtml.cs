@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DataAccess.Models;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Utility;
 
-namespace ThriftHub.Pages.Electronics
+namespace ThriftHub.Pages.Profile
 {
 	public class IndexModel : PageModel
     {
         private readonly UnitOfWork _unitOfWork;
-        public IEnumerable<Product> objProductList;
-        public List<Product> filteredProducts { get; set; }
+        [BindProperty]
+        public ApplicationUser objUser { get; set; }
+        public string? applicationUserId { get; set; }
 
         public IndexModel(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            objProductList = new List<Product>();
-            filteredProducts = new List<Product>();
+            objUser = new ApplicationUser();
         }
 
         public IActionResult OnGet()
@@ -28,10 +28,10 @@ namespace ThriftHub.Pages.Electronics
             //ApplicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //ApplicationUsername = User.FindFirstValue(ClaimTypes.Name);
             //FirstName = User.FindFirstValue(ClaimTypes.GivenName);
-            objProductList = _unitOfWork.Product.GetAll();
+            applicationUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Console.Write("myGetsfefef");
+            objUser = _unitOfWork.ApplicationUser.Get(u => u.Id == applicationUserId);
 
-            // Assuming objProductList is a collection of products
-            filteredProducts = objProductList.Where(product => product.CategoryId == SD.ElectronicsId).ToList();
             return Page();
         }
     }

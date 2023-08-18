@@ -7,7 +7,6 @@
         <input asp-for="objProduct.ImageUrl" hidden />
         <input asp-for="objProduct.PublishedDate" hidden />
         <input asp-for="objProduct.ApplicationUserId" hidden />
-        <p>"@Model.routingPage"</p>
         <div class="row">
             <div class="col-10">
                 <div class="border p-3 mt-4 row">
@@ -26,7 +25,7 @@
                     </div>
                     <div class="mb-3 col-6">
                         <label asp-for="objProduct.Price"></label>
-                        <input id="txtUPC" asp-for="objProduct.Price" class="form-control" />
+                        <input id="txtPrice" asp-for="objProduct.Price" class="form-control" />
                     </div>
                     <div class="mb-3">
                         <label asp-for="objProduct.ImageUrl"></label>
@@ -56,11 +55,21 @@
                         }
                         else
                         {
-                            @*<button type="submit"  onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>*@
-                           <button type = "submit" class="btn btn-primary" style="width:150px">Create</button>
-                            
+                            <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+
                         }
-                        <a asp-page="/@Model.routingPage/Index" class="btn btn-secondary" style="width:150px">
+                        @{
+                            var pageRoute = "";
+                            if (Model.objProduct.Id != 0)
+                            {
+                                pageRoute = "../ProductDetails/Index";
+                            }
+                            else
+                            {
+                                pageRoute = "../Index";
+                            }
+                        }
+                        <a asp-page="@pageRoute" sp-route-productId="@Model.objProduct.Id" class="btn btn-secondary" style="width:150px">
                             Back to List
                         </a>
                     </div>
@@ -77,67 +86,48 @@
 }
 
 
-@*@section Scripts{
+@section Scripts{
     <script>tinymce.init({
-			selector: 'textarea',
-			plugins: "lists",
-			menubar: "file edit format"
-		});
+            selector: 'textarea',
+            plugins: "lists",
+            menubar: "file edit format"
+        });
 
-		function ValidateInput() {
+        function ValidateInput() {
 
 
 
-			if (document.getElementById('txtName').value == "") {
-				swal.fire('Error', 'Please Enter a Product Name', 'error');
-				return false;
-			}
+            if (document.getElementById('txtName').value == "") {
+                swal.fire('Error', 'Please Enter a Product Name', 'error');
+                return false;
+            }
 
-			if (document.getElementById('txtUPC').value == "") {
-				swal.fire('Error', 'Please Enter a Product UPC', 'error');
-				return false;
-			}
+            if (tinyMCE.get('txtDesc').getContent() == "") {
+                swal.fire('Error', 'Please Enter a Product Description', 'error');
+                return false;
+            }
 
-			if ($('#txtUnitPrice').val() < .01) {
-				swal.fire('Error', 'Please Enter a Unit Price Greater Than $.01', 'error');
-				return false;
-			}
+            if (document.getElementById("uploadBox").value == "") {
+                swal.fire('Error', 'Please Select an Image', 'error')
+                return false
+            }
 
-			if ($('#txtListPrice').val() < .01) {
-				swal.fire('Error', 'Please Enter a List Price Greater Than $.01', 'error');
-				return false;
-			}
+            if ($('#ddlCategory option:selected').val() == 0) {
+                swal.fire('Error', 'Please Select a Catagory', 'error')
+                return false
+            }
 
-			if ($('#txtHalfDozenPrice').val() < .01) {
-				swal.fire('Error', 'Please Enter a Half Dozen+ Price Greater Than $.01', 'error');
-				return false;
-			}
+            if ($('#txtPrice').val() < 0.1) {
+                swal.fire('Error', 'Please Enter a List Price Greater Than 0.1€', 'error');
+                return false;
+            }
 
-			if ($('#txtDozenPrice').val() < .01) {
-				swal.fire('Error', 'Please Enter a Dozen+ Price Greater Than $.01', 'error');
-				return false;
-			}
+            if ($('#ddlQuantity option:selected').val() < 1) {
+                swal.fire('Error', 'Please Select a Quantity', 'error')
+                return false
+            }
 
-			if (tinyMCE.get('txtDesc').getContent() == "") {
-				swal.fire('Error', 'Please Enter a Product Description', 'error');
-				return false;
-			}
+            return true;
+        }</script>
+}
 
-			if (document.getElementById("uploadBox").value == "") {
-				swal.fire('Error', 'Please Select an Image', 'error')
-				return false
-			}
-
-			if ($('#ddlCategory option:selected').val() == 0) {
-				swal.fire('Error', 'Please Select a Catagory', 'error')
-				return false
-			}
-
-			if ($('#ddlManufacturer option:selected').val() == 0) {
-				swal.fire('Error', 'Please Select a Manufacturer', 'error')
-				return false
-			}
-
-			return true;
-		}</script>
-}*@

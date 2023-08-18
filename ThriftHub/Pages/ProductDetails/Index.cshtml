@@ -1,45 +1,57 @@
-﻿@page
+@page
 @model ThriftHub.Pages.ProductDetails.IndexModel
-@{
-}
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<IdentityUser> UserManager
 
-<div class="card container pt-4">
-    <img src="@Model.objProduct.ImageUrl" width="900" height="500" class="card-img-top rounded" />
+@{
+
+    <form method="post" class="card container pt-4">
+        <img src="@Model.objProduct.ImageUrl" width="900" height="500" class="card-img-top rounded" />
 
 
-    <div class="col-12 col-md-6">
-        <h1 class="text-white-50">@Model.objProduct.Name</h1>
-    </div>
-    <div class="col-12 col-md-6 text-end pt-4">
-        <span class="badge bg-warning pt-2" style="height: 30px;">@Model.objProduct.Category?.Name</span>
-        <p class="text-secondary">@Model.objProduct.Description</p>
-    </div>
-    <p class="text-secondary">@Model.objProduct.Description</p>
-    <p class="text-secondary">@Model.objProduct.Price</p>
-    <p class="text-secondary">@Model.objProduct.Quantity</p>
-    <p class="text-secondary">@Model.objProduct.PublishedDate</p>
-    <input type="hidden" asp-for="objProduct.ApplicationUserId" />
-    <input type="hidden" asp-for="objProduct.Id" />
-    @if (Model.objProduct.CategoryId != 0)
-    {
-        <input type="hidden" asp-for="objProduct.CategoryId" />
-    }
-
-    @if (@UserManager.GetUserId(User)! == @Model.objProduct.ApplicationUserId)
-    {
-        <div class="col-6 col-md-3">
-            <button type="submit" class="btn btn-danger form-control">Delete</button>
+        <div class="col-12 col-md-6">
+            <h1 class="text-white-50">@Model.objProduct.Name</h1>
         </div>
-    }
-    else
-    {
+        <div class="col-12 col-md-6 text-end pt-4">
+            <span class="badge bg-warning pt-2" style="height: 30px;">@Model.objProduct.Category?.Name: Name</span>
+            <p class="text-secondary">@Model.objProduct.Description</p>
+        </div>
+        <p class="text-secondary">@Model.objProduct.Description Description</p>
+        <p class="text-secondary">@Model.objProduct.Price Price</p>
+        <p class="text-secondary">@Model.objProduct.Quantity Quantity</p>
+        <p class="text-secondary">@Model.objProduct.PublishedDate Published Date</p>
+        <p>@Model.objProduct.Category?.Name</p>
+        <input type="hidden" asp-for="objProduct.ApplicationUserId" />
+        <input type="hidden" asp-for="objProduct.Id" />
+        @if (Model.objProduct.CategoryId != 0)
+        {
+            <input type="hidden" asp-for="objProduct.CategoryId" />
+        }
+
+        @if (@UserManager.GetUserId(User)! == @Model.objProduct.ApplicationUserId)
+        {
+            <div class="col-6 col-md-3">
+                <a asp-page="/UploadProduct/Upsert" asp-route-id="@Model.objProduct.Id" class="btn btn-outline-primary border  form-control">
+                    Update
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+            </div>
+
+        }
+        else
+        {
+            <div class="col-6 col-md-3">
+                <a asp-page="Index" class="btn btn-outline-primary border  form-control">
+                    Add To Basket
+                </a>
+            </div>
+        }
         <div class="col-6 col-md-3">
-            <a asp-page="Index" class="btn btn-outline-primary border  form-control">
-                Back to List
+            <a asp-page="../@Model.objProduct.Category?.Name/Index" asp-route-categoryId="@Model.objProduct.Category?.CategoryId" class="btn btn-outline-primary border  form-control">
+                Back to Product List
             </a>
         </div>
-    }
-
-</div>
+    </form>
+}
